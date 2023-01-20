@@ -1,13 +1,30 @@
-import React from 'react'
+import { useEffect } from 'react'
 import { Container, AppBar, Typography, Grow, Grid } from '@mui/material'
+import { useDispatch } from 'react-redux'
+import { getPosts } from './actions/posts'
 import Posts from './components/Posts/Posts'
 import Form from './components/Forms/Form'
 import image from './assets/image1.jpg'
 
 const App = () => {
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+      dispatch(getPosts())
+  }, [dispatch])
+
   return (
-    <Container maxWidth="lg">
-        <AppBar className='rounded-[15px] my-[30px] mx-0 flex flex-row justify-center items-center' position='static' color='inherit'>
+      <div>
+        <Container maxWidth="lg">
+        <AppBar style={{
+          borderRadius: 15,
+          margin: '30px 0',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }} position='static' color='inherit'>
             <Typography className='text-[#00b7ff]' variant="h2" align='center'>
               Stinger
             </Typography>
@@ -25,7 +42,8 @@ const App = () => {
               </Grid>
             </Container>
         </Grow>
-    </Container>
+      </Container>
+      </div>
   )
 }
 

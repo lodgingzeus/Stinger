@@ -7,17 +7,17 @@ dotenv.config()
 import postRoutes from './routes/posts.js'
 
 const app = express()
-
-// makes sure that all postRoutes start with /posts
-app.use('/posts', postRoutes)
+app.use(cors())
 
 const CONNECTION_URL = process.env.MONGODB_URL
 const PORT = process.env.PORT || 8181
 
-app.use(cors())
 
-app.use(express.json({limit: '30mb', extended: true}));
+app.use(express.json({limit: '30mb'}));
 app.use(express.urlencoded({limit: '30mb', extended: true}));
+
+// makes sure that all postRoutes start with /posts
+app.use('/posts', postRoutes)
 
 mongoose.set('strictQuery', true);
 mongoose.connect(CONNECTION_URL)
